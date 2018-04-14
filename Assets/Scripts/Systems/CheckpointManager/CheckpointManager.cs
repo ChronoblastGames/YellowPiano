@@ -19,6 +19,9 @@ public class CheckpointManager : MonoBehaviour
     public int nextCheckpointIndex;
 
     [Space(10)]
+    public bool isAtLastCheckpoint = false;
+
+    [Space(10)]
     public float minTargetDistanceToCheckpoint = 1f;
 
     [Header("Target Attributes")]
@@ -66,13 +69,16 @@ public class CheckpointManager : MonoBehaviour
     {
         if (currentCheckpoint != null && nextCheckpoint != null)
         {
-            float checkpointDistance = ReturnCheckpointDistance(nextCheckpoint);
-
-            Debug.DrawLine(targetTransform.position, nextCheckpoint, Color.yellow);
-
-            if (checkpointDistance < minTargetDistanceToCheckpoint)
+            if (!isAtLastCheckpoint)
             {
-                MoveToNextCheckpoint();
+                float checkpointDistance = ReturnCheckpointDistance(nextCheckpoint);
+
+                Debug.DrawLine(targetTransform.position, nextCheckpoint, Color.yellow);
+
+                if (checkpointDistance < minTargetDistanceToCheckpoint)
+                {
+                    MoveToNextCheckpoint();
+                }
             }
         }
     }
@@ -115,6 +121,8 @@ public class CheckpointManager : MonoBehaviour
 
             currentCheckpoint = checkpointPositions[checkpointIndex];
             nextCheckpoint = checkpointPositions[nextCheckpointIndex];
+
+            isAtLastCheckpoint = true;
         }
     }
 
