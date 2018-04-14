@@ -72,9 +72,6 @@ public class PlayerController2D : Controller2D
     [Header("Player Animation Attributes")]
     public PlayerAnimationController2D playerAnimation;
 
-    [Header("Player Reset Attributes")]
-    public Vector2 playerStartingPosition;
-
     private void Start()
     {
         ObjectSetup();
@@ -93,9 +90,15 @@ public class PlayerController2D : Controller2D
         playerAttackController = GetComponent<PlayerAttackController2D>();
         playerAnimation = GetComponent<PlayerAnimationController2D>();
 
-        playerStartingPosition = transform.position;
+        EventSetup();
 
         CalculateGravity();
+    }
+
+    private void EventSetup()
+    {
+        PlayerHealthController2D.OnPlayerDeath += ResetController;
+        PlayerHealthController2D.OnPlayerGameOver += DisableController;
     }
 
     public void ReceiveInputData(Vector2 rawInput, Vector2 inputDirection)
@@ -153,11 +156,13 @@ public class PlayerController2D : Controller2D
         }
     }
 
-    public void ResetController()
+    public override void ResetController()
     {
+        Vector2 currentCheckpoint = CheckpointManager.Instance.currentCheckpoint;
+
         playerVelocity = Vector2.zero;
 
-        transform.position = playerStartingPosition;
+        transform.position = currentCheckpoint;
     }
 
     public void StartSprint()

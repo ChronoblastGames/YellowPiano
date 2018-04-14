@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class ResetZone : MonoBehaviour
+public class ResetZone : Zone
 {
-    [Header("Reset Zone Attributes")]
-    public Vector2 resetPosition;
+    public override void ZoneEffect(GameObject player)
+    {
+        PlayerController2D playerController = player.GetComponent<PlayerController2D>();
+
+        playerController.ResetController();
+    }
 }

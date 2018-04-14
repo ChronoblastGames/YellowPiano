@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
+    private static CheckpointManager _instance;
+    public static CheckpointManager Instance { get { return _instance; } }
+
     [Header("Checkpoint Attributes")]
     public Transform[] checkpoints;
 
@@ -16,8 +18,16 @@ public class CheckpointManager : MonoBehaviour
     public int checkpointIndex;
     public int nextCheckpointIndex;
 
+    [Space(10)]
+    public float minTargetDistanceToCheckpoint = 1f;
+
     [Header("Target Attributes")]
     public Transform targetTransform;
+
+    private void Awake()
+    {
+        InitializeCheckpointManager();
+    }
 
     private void Start()
     {
@@ -27,6 +37,18 @@ public class CheckpointManager : MonoBehaviour
     private void Update()
     {
         ManageCheckpoints();
+    }
+
+    private void InitializeCheckpointManager()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     private void CheckpointsSetup()
@@ -44,12 +66,12 @@ public class CheckpointManager : MonoBehaviour
     {
         if (currentCheckpoint != null && nextCheckpoint != null)
         {
-            float nextCheckpointAngle = ReturnCheckpointDirection(nextCheckpoint);
+            float checkpointDistance = ReturnCheckpointDistance(nextCheckpoint);
 
-            if (nextCheckpointAngle > 0)
+            Debug.DrawLine(targetTransform.position, nextCheckpoint, Color.yellow);
+
+            if (checkpointDistance < minTargetDistanceToCheckpoint)
             {
-                Debug.Log("Moving to next Checkpoint! :: " + nextCheckpointAngle);
-
                 MoveToNextCheckpoint();
             }
         }
@@ -98,10 +120,15 @@ public class CheckpointManager : MonoBehaviour
 
     private float ReturnCheckpointDirection(Vector2 targetCheckpoint)
     {
-        Vector2 interceptVector = targetCheckpoint - (Vector2)targetTransform.position;
+        Vector2 interceptVector = ((Vector2)targetTransform.position - targetCheckpoint).normalized;
 
-        float checkpointDirection = Vector2.Dot(targetCheckpoint, interceptVector);
+        return interceptVector.x;
+    }
 
-        return checkpointDirection;
+    private float ReturnCheckpointDistance(Vector2 targetCheckpoint)
+    {
+        float checkpointDistance = Vector2.Distance(targetTransform.position, targetCheckpoint);
+
+        return checkpointDistance;
     }
 }

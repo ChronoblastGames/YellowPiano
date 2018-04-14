@@ -24,4 +24,14 @@ public class Controller2D : MonoBehaviour
     {
         MoveController(finalControllerVelocity, isOnPlatform);
     }
+
+    public virtual void ResetController()
+    {
+
+    }
+
+    public virtual void DisableController()
+    {
+
+    }
 }

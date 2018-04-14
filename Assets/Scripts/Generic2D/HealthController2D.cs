@@ -17,7 +17,7 @@ public class HealthController2D : MonoBehaviour
         HealthControllerSetup();
     }
 
-    private void HealthControllerSetup()
+    public virtual void HealthControllerSetup()
     {
         targetCurrentHealth = healthAttributes.targetMaxHealth;
     }
