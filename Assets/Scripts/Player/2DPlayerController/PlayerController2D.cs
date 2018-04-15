@@ -75,6 +75,9 @@ public class PlayerController2D : Controller2D
     [Header("Player Animation Attributes")]
     public PlayerAnimationController2D playerAnimation;
 
+    [Header("Player Audio Attributes")]
+    public PlayerAudioController2D playerAudio;
+
     private void Start()
     {
         ObjectSetup();
@@ -92,6 +95,7 @@ public class PlayerController2D : Controller2D
         playerCollision = GetComponent<PlayerCollisionManager2D>();
         playerAttackController = GetComponent<PlayerAttackController2D>();
         playerAnimation = GetComponent<PlayerAnimationController2D>();
+        playerAudio = GetComponent<PlayerAudioController2D>();
 
         EventSetup();
 
@@ -163,6 +167,8 @@ public class PlayerController2D : Controller2D
 
     public override void ResetController()
     {
+        playerAudio.RequestAudioEvent("DeathSFX");
+
         Vector2 currentCheckpoint = CheckpointManager.Instance.currentCheckpoint;
 
         playerVelocity = Vector2.zero;
@@ -292,6 +298,8 @@ public class PlayerController2D : Controller2D
                 playerVelocity.y = playerMaxJumpVelocity.y;
 
                 playerAnimation.SetTrigger("isJump");
+
+                playerAudio.RequestAudioEvent("jumpSFX");
             }
         }
     }
