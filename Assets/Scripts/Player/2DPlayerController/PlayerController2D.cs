@@ -121,6 +121,8 @@ public class PlayerController2D : Controller2D
 
         MoveController(playerVelocity * Time.deltaTime, false);
 
+        playerAnimation.SetBool("isGrounded", playerCollision.collisionData.isCollidingBelow);
+
         if (playerCollision.collisionData.isCollidingAbove || playerCollision.collisionData.isCollidingBelow)
         {
             if (playerCollision.collisionData.isSlidingDownSlope)
@@ -151,7 +153,7 @@ public class PlayerController2D : Controller2D
 
         transform.Translate(finalPlayerVelocity);
 
-        playerAnimation.SetFloat("moveSpeed", finalPlayerVelocity.x);
+        playerAnimation.SetFloat("moveSpeed", Mathf.Abs(finalPlayerVelocity.x));
 
         if (isOnPlatform)
         {
@@ -243,6 +245,8 @@ public class PlayerController2D : Controller2D
 
                 playerVelocity.x = -wallDirectionX * playerWallClimbAttributes.wallJumpClimb.x;
                 playerVelocity.y = playerWallClimbAttributes.wallJumpClimb.y;
+
+                playerAnimation.SetTrigger("isWallJump");
             }
             else if (playerInputDirection.x == 0)
             {
@@ -253,6 +257,8 @@ public class PlayerController2D : Controller2D
 
                 playerVelocity.x = -wallDirectionX * playerWallClimbAttributes.wallJumpOff.x;
                 playerVelocity.y = playerWallClimbAttributes.wallJumpOff.y;
+
+                playerAnimation.SetTrigger("isWallJump");
             }
             else
             {
@@ -263,6 +269,8 @@ public class PlayerController2D : Controller2D
 
                 playerVelocity.x = -wallDirectionX * playerWallClimbAttributes.wallJumpLeap.x;
                 playerVelocity.y = playerWallClimbAttributes.wallJumpLeap.y;
+
+                playerAnimation.SetTrigger("isWallJump");
             }
         }
         else if (playerCollision.collisionData.isCollidingBelow)
@@ -273,6 +281,8 @@ public class PlayerController2D : Controller2D
                 {
                     playerVelocity.y = playerMaxJumpVelocity.y * playerCollision.collisionData.slopeNormal.y;
                     playerVelocity.x = playerMaxJumpVelocity.y * playerCollision.collisionData.slopeNormal.x;
+
+                    playerAnimation.SetTrigger("isJump");
                 }
             }
             else
@@ -280,6 +290,8 @@ public class PlayerController2D : Controller2D
                 CalculateJumpVelocity();
 
                 playerVelocity.y = playerMaxJumpVelocity.y;
+
+                playerAnimation.SetTrigger("isJump");
             }
         }
     }
@@ -339,6 +351,9 @@ public class PlayerController2D : Controller2D
                 wallStickTime = playerWallClimbAttributes.wallStickToTime;
             }
         }
+
+        playerAnimation.SetBool("isWallSliding", isWallSliding);
+
     }
 
     private Vector2 CalculateDashAcceleration(float dashDistance, float dashTime)
