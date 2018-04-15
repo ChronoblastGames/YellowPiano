@@ -32,6 +32,8 @@ public class AudioManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PauseAllActiveSources()
@@ -49,6 +51,33 @@ public class AudioManager : MonoBehaviour
         foreach (AudioSourceController audioSourceController in activeDialogueAudioSourceControllers)
         {
             audioSourceController.PauseClip();
+        }
+    }
+
+    public void StopAllAudioSourceOfType(AUDIO_SOURCE_TYPE audioSourceType)
+    {
+        switch(audioSourceType)
+        {
+            case AUDIO_SOURCE_TYPE.MUSIC:
+                foreach (AudioSourceController audioSourceController in activeMusicAudioSourceControllers)
+                {
+                    audioSourceController.StopClip();
+                }
+                break;
+
+            case AUDIO_SOURCE_TYPE.SOUND_EFFECT:
+                foreach (AudioSourceController audioSourceController in activeSoundEffectAudioSourceControllers)
+                {
+                    audioSourceController.StopClip();
+                }
+                break;
+
+            case AUDIO_SOURCE_TYPE.DIALOGUE:
+                foreach (AudioSourceController audioSourceController in activeDialogueAudioSourceControllers)
+                {
+                    audioSourceController.StopClip();
+                }
+                break;
         }
     }
 
