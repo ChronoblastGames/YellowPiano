@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Rewired;
 
 public class NavigatorCamera : MonoBehaviour
 {
+    private Player playerInput;
+
     [Header("Navigator Camera Attributes")]
     public NavigatorCameraAttributes2D navigatorCameraAttributes;
 
@@ -24,6 +27,17 @@ public class NavigatorCamera : MonoBehaviour
     private void Start()
     {
         CameraNavigationSetup();
+        InputSetup();
+    }
+
+    private void Update()
+    {
+        ManageInput();   
+    }
+
+    private void InputSetup()
+    {
+        playerInput = ReInput.players.GetPlayer(0);
     }
 
     private void CameraNavigationSetup()
@@ -36,6 +50,22 @@ public class NavigatorCamera : MonoBehaviour
         previousWaypoint = cameraWaypoints[0];
 
         StartCoroutine(CameraNavigation(navigatorCameraAttributes.cameraWaitTime, navigatorCameraAttributes.cameraPanTime));
+    }
+
+    private void ManageInput()
+    {
+        if (playerInput.GetButtonDown("NextLevel"))
+        {
+            if (hasReachedEndOfWaypoints)
+            {
+                LevelManager.Instance.LoadNextLevel();
+            }
+        }
+
+        if (playerInput.GetButtonDown("LevelReset"))
+        {
+            LevelManager.Instance.ReloadCurrentLevel();
+        }
     }
 
     private void MoveToNextPoint()
