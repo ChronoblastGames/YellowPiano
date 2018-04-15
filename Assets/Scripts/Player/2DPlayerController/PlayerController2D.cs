@@ -63,6 +63,9 @@ public class PlayerController2D : Controller2D
     [Space(10)]
     public bool isDashing = false;
 
+    [Space(10)]
+    public bool canPlayerDash = true;
+
     [Header("Player Attack Attributes")]
     public PlayerAttackController2D playerAttackController;
 
@@ -348,44 +351,47 @@ public class PlayerController2D : Controller2D
 
     public void PlayerDash()
     {
-        if (!isDashing)
+        if (canPlayerDash)
         {
-            if (playerInputDirection.x != 0)
+            if (!isDashing)
             {
-                float dashDistance = 0;
-                float dashTime = 0;
-
-                playerDashDirection = (playerInputDirection.x == -1) ? DIRECTION.LEFT : DIRECTION.RIGHT;
-
-                if (playerCollision.collisionData.isCollidingBelow)
+                if (playerInputDirection.x != 0)
                 {
-                    dashDistance = (playerDashDirection == DIRECTION.LEFT) ? -playerDashingAttributes.playerGroundDashDistance : playerDashingAttributes.playerGroundDashDistance;
-                    dashTime = playerDashingAttributes.playerGroundDashTime;
+                    float dashDistance = 0;
+                    float dashTime = 0;
 
-                    hasAirDashed = false;
+                    playerDashDirection = (playerInputDirection.x == -1) ? DIRECTION.LEFT : DIRECTION.RIGHT;
+
+                    if (playerCollision.collisionData.isCollidingBelow)
+                    {
+                        dashDistance = (playerDashDirection == DIRECTION.LEFT) ? -playerDashingAttributes.playerGroundDashDistance : playerDashingAttributes.playerGroundDashDistance;
+                        dashTime = playerDashingAttributes.playerGroundDashTime;
+
+                        hasAirDashed = false;
+                    }
+                    else if (!hasAirDashed)
+                    {
+                        dashDistance = (playerDashDirection == DIRECTION.LEFT) ? -playerDashingAttributes.playerAirDashDistance : playerDashingAttributes.playerAirDashDistance;
+                        dashTime = playerDashingAttributes.playerGroundDashTime;
+
+                        hasAirDashed = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                    playerDashVelocity = CalculateDashAcceleration(dashDistance, dashTime);
+
+                    playerDashEndTime = Time.time + dashTime;
+
+                    playerVelocityBeforeDash = playerVelocity;
+
+                    playerVelocity.x = 0;
+                    playerMovementSmoothVelocity = 0;
+
+                    isDashing = true;
                 }
-                else if (!hasAirDashed)
-                {
-                    dashDistance = (playerDashDirection == DIRECTION.LEFT) ? -playerDashingAttributes.playerAirDashDistance : playerDashingAttributes.playerAirDashDistance;
-                    dashTime = playerDashingAttributes.playerGroundDashTime;
-
-                    hasAirDashed = true;
-                }
-                else
-                {
-                    return;
-                }
-
-                playerDashVelocity = CalculateDashAcceleration(dashDistance, dashTime);
-
-                playerDashEndTime = Time.time + dashTime;
-
-                playerVelocityBeforeDash = playerVelocity;
-
-                playerVelocity.x = 0;
-                playerMovementSmoothVelocity = 0;
-
-                isDashing = true;
             }
         }
     }
