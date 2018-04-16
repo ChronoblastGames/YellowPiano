@@ -1631,8 +1631,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startUI: {fileID: 234200499}
   gameSelectUI: {fileID: 1060891594}
-  navigatorFirstLevel: 0
-  controllerFirstLevel: 0
+  navigatorFirstLevel: 4
+  controllerFirstLevel: 1
   isDisplayingPlayerSelect: 0
 --- !u!4 &2025431536
 Transform:

@@ -8,6 +8,6 @@ public class WinZone : Zone
 
     public override void ZoneEffect(GameObject effectedObject)
     {
-        LevelManager.Instance.LoadLevel(levelID);
+        LevelManager.Instance.LoadNextLevel();
     }
 }

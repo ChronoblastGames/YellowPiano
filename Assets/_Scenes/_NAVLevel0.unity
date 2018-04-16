@@ -6062,6 +6062,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4068753363786548, guid: 8cf4e50fdf4c81147a7b61eded063085,
     type: 2}
   m_PrefabInternal: {fileID: 374473091}
+--- !u!1001 &1649411581
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268847235329218, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: aaaf11e8f56d3e64496db1d5522e6911, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1723471208
 Prefab:
   m_ObjectHideFlags: 0
@@ -6202,7 +6244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navigatorCameraAttributes:
-    cameraWaitTime: 1
+    cameraWaitTime: 30
     cameraPanTime: 2
   cameraNavigationPoints:
   - {fileID: 1527519295}

@@ -28,6 +28,8 @@ GameObject:
   - component: {fileID: 114791921395744926}
   - component: {fileID: 114982980637873800}
   - component: {fileID: 114407769089451972}
+  - component: {fileID: 114471309150254246}
+  - component: {fileID: 114833494442894960}
   m_Layer: 8
   m_Name: 2DPlayer
   m_TagString: Player
@@ -71,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757576778660536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27, y: 12.2, z: 0}
+  m_LocalPosition: {x: -28.542, y: 11.625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4513336067574220}
@@ -110,18 +112,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.12, y: -0.31}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.875}
+    oldSize: {x: 1.6875, y: 1.125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 1.85}
+  m_Size: {x: 0.86, y: 0.64}
   m_EdgeRadius: 0
 --- !u!61 &61327494242725830
 BoxCollider2D:
@@ -157,7 +159,7 @@ Animator:
   m_GameObject: {fileID: 1757576778660536}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf26ad5c06becce46a37e378b4e86665, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -209,8 +211,11 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 8192
   isDashing: 0
+  canPlayerDash: 1
   playerAttackController: {fileID: 0}
   playerCollision: {fileID: 0}
+  playerAnimation: {fileID: 0}
+  playerAudio: {fileID: 0}
 --- !u!114 &114240823953946880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,6 +246,28 @@ MonoBehaviour:
     targetMaxHealth: 100
   targetCurrentHealth: 0
   canTargetTakeDamage: 1
+  playerLivesAttributes:
+    playerMaxLives: 3
+  playerCurrentLives: 0
+--- !u!114 &114471309150254246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757576778660536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e432ae41edf75c4482f73bec0313bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityAudioClips:
+    entityAudio:
+    - name: MoveSFX
+      clip: {fileID: 0}
+    - name: JumpSFX
+      clip: {fileID: 8300000, guid: dbd2bd45f0a4f004690570c5301f7cf3, type: 3}
+    - name: DeathSFX
+      clip: {fileID: 8300000, guid: bdb85ca9bec64c54c8aa8c29483e39de, type: 3}
 --- !u!114 &114791921395744926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +301,7 @@ MonoBehaviour:
     isAscendingSlope: 0
     isDescendingSlope: 0
     isSlidingDownSlope: 0
+    isFallingThroughPlatform: 0
   objectBounds:
     topLeft: {x: 0, y: 0}
     bottomLeft: {x: 0, y: 0}
@@ -287,6 +315,19 @@ MonoBehaviour:
   collisionVerticalRaySpacing: 0
   playerWallCollisionData:
     isAdjacentToClimbableWall: 0
+--- !u!114 &114833494442894960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757576778660536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088b4a8356d356f40899effeb3cb3267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAnimator: {fileID: 0}
+  currentAnimation: {fileID: 0}
 --- !u!114 &114982980637873800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,7 +386,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fcd1997076d4e7f4e8ef0a77550471f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: acd882f262a63814d8140ce83517f4d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

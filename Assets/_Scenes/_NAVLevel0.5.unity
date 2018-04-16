@@ -17377,7 +17377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navigatorCameraAttributes:
-    cameraWaitTime: 1
+    cameraWaitTime: 30
     cameraPanTime: 1
   cameraNavigationPoints:
   - {fileID: 896366715}

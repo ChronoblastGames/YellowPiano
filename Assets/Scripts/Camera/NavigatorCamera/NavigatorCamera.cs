@@ -62,7 +62,7 @@ public class NavigatorCamera : MonoBehaviour
             }
         }
 
-        if (playerInput.GetButtonDown("LevelReset"))
+        if (playerInput.GetButtonDown("RestartLevel"))
         {
             LevelManager.Instance.ReloadCurrentLevel();
         }
