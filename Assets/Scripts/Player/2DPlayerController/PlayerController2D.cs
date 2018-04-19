@@ -24,6 +24,10 @@ public class PlayerController2D : Controller2D
 
     private bool isPlayerSprinting = false;
 
+    private Vector2 startingPosition;
+
+    private CheckpointManager checkpointManager;
+
     [Header("Player Jump Attributes")]
     public PlayerJumpingAttributes2D playerJumpAttributes;
 
@@ -97,6 +101,10 @@ public class PlayerController2D : Controller2D
         playerAnimation = GetComponent<PlayerAnimationController2D>();
         playerAudio = GetComponent<PlayerAudioController2D>();
 
+        checkpointManager = GameObject.FindObjectOfType<CheckpointManager>();
+
+        startingPosition = transform.position;
+
         EventSetup();
 
         CalculateGravity();
@@ -148,6 +156,8 @@ public class PlayerController2D : Controller2D
 
             playerVelocity.x = Mathf.SmoothDamp(playerVelocity.x, playerMovementTargetSpeed, ref playerMovementSmoothVelocity, ReturnPlayerSmoothMovementTime());
             playerVelocity.y += playerGravity * Time.deltaTime;
+
+            playerAnimation.SetFloat("moveSpeed", Mathf.Abs(playerVelocity.x));
         }
     }
 
@@ -157,7 +167,6 @@ public class PlayerController2D : Controller2D
 
         transform.Translate(finalPlayerVelocity);
 
-        playerAnimation.SetFloat("moveSpeed", Mathf.Abs(finalPlayerVelocity.x));
 
         if (isOnPlatform)
         {
@@ -169,11 +178,20 @@ public class PlayerController2D : Controller2D
     {
         playerAudio.RequestAudioEvent("DeathSFX");
 
-        Vector2 currentCheckpoint = CheckpointManager.Instance.currentCheckpoint;
+        if (this != null)
+        {
+            Vector2 currentCheckpoint = checkpointManager.currentCheckpoint;
 
-        playerVelocity = Vector2.zero;
+            playerVelocity = Vector2.zero;
 
-        transform.position = currentCheckpoint;
+            Debug.Log(transform);
+
+            transform.position = currentCheckpoint;
+        }
+        else
+        {
+            Debug.Log("WTF");
+        }
     }
 
     public void StartSprint()

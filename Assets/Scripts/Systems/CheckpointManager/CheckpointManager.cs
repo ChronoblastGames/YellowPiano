@@ -2,9 +2,6 @@
 
 public class CheckpointManager : MonoBehaviour
 {
-    private static CheckpointManager _instance;
-    public static CheckpointManager Instance { get { return _instance; } }
-
     [Header("Checkpoint Attributes")]
     public Transform[] checkpoints;
 
@@ -27,11 +24,6 @@ public class CheckpointManager : MonoBehaviour
     [Header("Target Attributes")]
     public Transform targetTransform;
 
-    private void Awake()
-    {
-        InitializeCheckpointManager();
-    }
-
     private void Start()
     {
         CheckpointsSetup();
@@ -42,21 +34,11 @@ public class CheckpointManager : MonoBehaviour
         ManageCheckpoints();
     }
 
-    private void InitializeCheckpointManager()
-    {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
-    }
-
     private void CheckpointsSetup()
     {
         ReadCheckpointData();
+
+        targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         checkpointIndex = 0;
         nextCheckpointIndex = 1;

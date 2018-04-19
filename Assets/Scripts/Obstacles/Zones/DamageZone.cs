@@ -14,5 +14,7 @@ public class DamageZone : Zone
         {
             healthController.TakeDamage(zoneDamage);
         }
+
+        healthController = null;
     }
 }

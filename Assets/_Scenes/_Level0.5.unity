@@ -13703,29 +13703,11 @@ Transform:
   m_Father: {fileID: 936696477}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &88627945 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1757576778660536, guid: b2a7c7807afad4741a08c3d1a68f2096,
-    type: 2}
-  m_PrefabInternal: {fileID: 860082857}
 --- !u!4 &88627954 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4736656938846558, guid: b2a7c7807afad4741a08c3d1a68f2096,
     type: 2}
   m_PrefabInternal: {fileID: 860082857}
---- !u!114 &88627955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 88627945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 088b4a8356d356f40899effeb3cb3267, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetAnimator: {fileID: 0}
-  currentAnimation: {fileID: 0}
 --- !u!1001 &590608336
 Prefab:
   m_ObjectHideFlags: 0
@@ -14048,7 +14030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1027350425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14060,7 +14042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581b3e3c96df0ef42aef16b63b27b87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dontDestroyOnLoad: 1
+  _dontDestroyOnLoad: 0
   _userData:
     configVars:
       updateLoop: 1
@@ -14181,7 +14163,7 @@ MonoBehaviour:
       _descriptiveName: Player0
       _startPlaying: 1
       _defaultJoystickMaps:
-      - _enabled: 0
+      - _enabled: 1
         _categoryId: 0
         _layoutId: 0
       _defaultMouseMaps: []
